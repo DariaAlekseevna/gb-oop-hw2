@@ -11,10 +11,12 @@ public class Person {
         this.jumpHeight = jumpHeight;
     }
 
-    void run(){
-        System.out.println(name +" бежит дистанцию " + dist + " метров" );
+
+    void run() {
+        System.out.println(name + " бежит дистанцию " + dist + " метров");
     }
-    void jump(){
+
+    void jump() {
         System.out.println(name + " прыгнул с высотой " + jumpHeight + " см");
     }
 

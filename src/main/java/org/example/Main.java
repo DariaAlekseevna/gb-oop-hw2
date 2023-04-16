@@ -14,7 +14,7 @@ public class Main {
         person2.run();
 
         Cat cat1 = new Cat("Pushok", 450, 200);
-        Cat cat2 = new Cat("Murzik", 550, 250);
+        Cat cat2 = new Cat("Murzik", 850, 250);
         cat1.jump();
         cat1.run();
         cat2.jump();
@@ -36,10 +36,12 @@ public class Main {
         members.add(robot2);
 
         RunningTrack runningTrack1 = new RunningTrack(500);
-        RunningTrack runningTrack2 = new RunningTrack(1100);
+        RunningTrack runningTrack2 = new RunningTrack(800);
         Wall wall1 = new Wall(50);
         Wall wall2 = new Wall(100);
         Wall wall3 = new Wall(200);
+
+        System.out.println();
 
         ArrayList obstacles = new ArrayList<>();
         obstacles.add(runningTrack1);
@@ -48,23 +50,32 @@ public class Main {
         obstacles.add(wall2);
         obstacles.add(wall3);
 
-        for (int i = 0; i < obstacles.size(); i++) {
-            for (int j = 0; j < members.size(); j++) {
-                if (obstacles.get(i) instanceof RunningTrack) {
+        boolean b = true;
+        for (int j = 0; j < members.size(); j++) {
+            b = true;
+            for (int i = 0; i < obstacles.size(); i++) {
+                if ((obstacles.get(i) instanceof RunningTrack) && (b)) {
                     if (members.get(j) instanceof Person) {
-                        ((RunningTrack) obstacles.get(i)).run(((Person) members.get(j)).getName(), ((Person) members.get(j)).getDist());
+                        b = ((RunningTrack) obstacles.get(i)).run(((Person) members.get(j)).getName(),
+                                ((Person) members.get(j)).getDist());
+
                     } else if ((members.get(j) instanceof Cat)) {
-                        ((RunningTrack) obstacles.get(i)).run(((Cat) members.get(j)).getName(), ((Cat) members.get(j)).getDist());
+                        b = ((RunningTrack) obstacles.get(i)).run(((Cat) members.get(j)).getName(),
+                                ((Cat) members.get(j)).getDist());
                     } else if (((members.get(j) instanceof Robot))) {
-                        ((RunningTrack) obstacles.get(i)).run(((Robot) members.get(j)).getName(), ((Robot) members.get(j)).getDist());
+                        b = ((RunningTrack) obstacles.get(i)).run(((Robot) members.get(j)).getName(),
+                                ((Robot) members.get(j)).getDist());
                     }
-                } else if ((obstacles.get(i) instanceof Wall)) {
+                } else if ((obstacles.get(i) instanceof Wall) && (b)) {
                     if (members.get(j) instanceof Person) {
-                        ((Wall) obstacles.get(i)).jump(((Person) members.get(j)).getName(), ((Person) members.get(j)).getJumpHeight());
+                        b = ((Wall) obstacles.get(i)).jump(((Person) members.get(j)).getName(),
+                                ((Person) members.get(j)).getJumpHeight());
                     } else if ((members.get(j) instanceof Cat)) {
-                        ((Wall) obstacles.get(i)).jump(((Cat) members.get(j)).getName(), ((Cat) members.get(j)).getJumpHeight());
+                        b = ((Wall) obstacles.get(i)).jump(((Cat) members.get(j)).getName(),
+                                ((Cat) members.get(j)).getJumpHeight());
                     } else if (((members.get(j) instanceof Robot))) {
-                        ((Wall) obstacles.get(i)).jump(((Robot) members.get(j)).getName(), ((Robot) members.get(j)).getJumpHeight());
+                        b = ((Wall) obstacles.get(i)).jump(((Robot) members.get(j)).getName(),
+                                ((Robot) members.get(j)).getJumpHeight());
                     }
                 }
             }
